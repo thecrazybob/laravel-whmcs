@@ -103,4 +103,19 @@ class WHMCS extends WhmcsCore {
 
         return $this->submitRequest($data);
     }
+
+    public function addOrder($client_id, $paymentmethod, $pid)
+    {
+
+        $data = [
+            'action'        => 'AddOrder',
+            'clientid'      => $client_id,
+            'paymentmethod' => $paymentmethod,
+            'pid'           => $pid
+        ];
+
+        return $this->submitRequest($data);
+
+    }   
+
 }

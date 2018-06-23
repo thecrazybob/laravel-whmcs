@@ -116,6 +116,18 @@ class WHMCS extends WhmcsCore {
 
         return $this->submitRequest($data);
 
-    }   
+    }
+
+    public function validateLogin($email, $password) {
+
+        $data = [
+            'action'        => 'ValidateLogin',
+            'email'         => $email,
+            'password2'      => $password
+        ];
+
+        return $this->submitRequest($data);
+
+    }
 
 }

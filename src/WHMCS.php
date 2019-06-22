@@ -42,7 +42,7 @@ class WHMCS extends WhmcsCore {
      * @param bool $stats
      * @return array
      */
-    public function getClientDetails($client_id, $stats = false)
+    public function getClientsDetails($client_id, $stats = false)
     {
         $data = [
             'action'    =>  'getclientsdetails',
@@ -91,6 +91,15 @@ class WHMCS extends WhmcsCore {
         return $this->submitRequest($data);
     }
 
+    public function getInvoice($id) {
+        $data = [
+            'action'       => 'GetInvoice',
+            'invoiceid'           => $id
+        ];
+
+        return $this->submitRequest($data);
+    }
+
     /**
      * Creates a new client
      * 
@@ -99,20 +108,21 @@ class WHMCS extends WhmcsCore {
      */
     public function createClient($data)
     {
-        $data['action'] = 'addclient';
+        $data['action'] = 'AddClient';
 
         return $this->submitRequest($data);
     }
 
-    public function addOrder($client_id, $paymentmethod, $pid)
+    public function addOrder($data)
     {
 
-        $data = [
-            'action'        => 'AddOrder',
-            'clientid'      => $client_id,
-            'paymentmethod' => $paymentmethod,
-            'pid'           => $pid
-        ];
+        // $data = [
+        //     'action'        => 'AddOrder',
+        //     'clientid'      => $client_id,
+        //     'paymentmethod' => $paymentmethod,
+        //     'pid'           => $pid
+        // ];
+        $data['action'] = 'AddOrder';
 
         return $this->submitRequest($data);
 
@@ -123,11 +133,43 @@ class WHMCS extends WhmcsCore {
         $data = [
             'action'        => 'ValidateLogin',
             'email'         => $email,
-            'password2'      => $password
+            'password2'     => $password
         ];
 
         return $this->submitRequest($data);
 
+    }
+
+    public function getProducts($pid=null, $gid=null) {
+        $data = [
+            'action'        => 'GetProducts',
+            'pid'           => $pid,
+            'gid'           => $gid
+        ];
+
+        if (empty($pid)) { unset($data['pid']); }
+
+        return $this->submitRequest($data);
+    }
+
+    public function domainWhois($domain) {
+        $data = [
+            'action'        => 'DomainWhois',
+            'domain'        => $domain
+        ];
+
+        return $this->submitRequest($data);
+    }
+
+    public function getTLDPricing($currency_id='', $client_id='') {
+
+        $data = [
+            'action'        => 'GetTLDPricing',
+            'currencyid'    => $currency_id,
+            'clientid'      => $client_id
+        ];
+
+        return $this->submitRequest($data);
     }
 
 }

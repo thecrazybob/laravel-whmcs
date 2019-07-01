@@ -172,14 +172,17 @@ class WHMCS extends WhmcsCore {
         return $this->submitRequest($data);
     }
 
-    public function addInvoicePayment($paymentDetails, $invoice_id) {
+    public function addInvoicePayment($paymentDetails, $invoice_id, $noemail) {
 
         $data = [
             'action'    => 'AddInvoicePayment',
             'invoiceid' => $invoice_id,
             'transid'   => $paymentDetails['transaction_id'],
             'gateway'   => $paymentDetails['gateway'],
-            'date'      => $paymentDetails['transaction_date']
+            'date'      => $paymentDetails['transaction_date'],
+            'amount'    => $paymentDetails['amount'],
+            'fees'      => $paymentDetails['fees'], 
+            'noemail'   => $noemail
         ];
 
         return $this->submitRequest($data);

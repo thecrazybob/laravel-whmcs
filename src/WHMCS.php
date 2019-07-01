@@ -172,7 +172,7 @@ class WHMCS extends WhmcsCore {
         return $this->submitRequest($data);
     }
 
-    public function AddInvoicePayment($paymentDetails, $invoice_id) {
+    public function addInvoicePayment($paymentDetails, $invoice_id) {
 
         $data = [
             'action'    => 'AddInvoicePayment',

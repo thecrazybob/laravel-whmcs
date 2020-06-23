@@ -112,7 +112,7 @@ class WhmcsCore {
     /**
      * Formats the response based on the set response_type
      *
-     * @param array $response
+     * @param object $response
      * @return array
      */
     protected function handleResponse($response)

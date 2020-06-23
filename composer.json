@@ -5,16 +5,26 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "TheCrazyBob"
+            "name": "Mohammed Sohail"
         }
     ],
     "require": {
-        "php": ">=5.5.9",
-        "guzzlehttp/guzzle": "~6.0"
+        "php": "^7.2.5",
+        "guzzlehttp/guzzle": "^6.5"
     },
     "autoload": {
         "psr-4": {
             "WHMCS\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "WHMCS\\WHMCSServiceProvider"
+            ],
+            "aliases": {
+                "WHMCS": "WHMCS\\Facades\\WHMCS"
+            }
         }
     },
     "minimum-stability": "dev"

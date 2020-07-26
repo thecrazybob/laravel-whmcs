@@ -32,6 +32,11 @@ class WhmcsCore {
     protected $api_secret;
 
     /**
+     * @var string
+     */
+    protected $api_access_key;
+
+    /**
      * @var int
      */
     protected $timeout;
@@ -58,6 +63,8 @@ class WhmcsCore {
 
         $this->api_identifier   = config('whmcs.api_identifier');
         $this->api_secret       = config('whmcs.api_secret');
+
+        $this->api_access_key   = config('whmcs.api_access_key');
 
         $this->response_type    = strtolower(config('whmcs.response_type'));
 
@@ -105,7 +112,11 @@ class WhmcsCore {
         $params['secret']             = $this->api_secret;
 
         $params['responsetype']       = $this->response_type;
-
+        
+        if (!empty($this->api_access_key)) {
+            $params['accesskey']          = $this->api_access_key;
+        }
+        
         return $params;
     }
 
